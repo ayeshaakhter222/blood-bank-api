@@ -51,7 +51,11 @@ class JwtAuthController extends Controller
         ]);
 
         if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
+            return response()->json([
+             'message' => 'Validation Error',
+             'status' => false,
+             'data' => $validator->errors()->toJson()
+         ], 200);
         }
 
         $inputs['password'] = bcrypt($request->password);
@@ -62,8 +66,8 @@ class JwtAuthController extends Controller
         
          return response()->json([
              'message' => 'User successfully registered',
-             'user' => $user
-         ], 201);
+             'status' => true
+         ], 200);
      }
    
 
