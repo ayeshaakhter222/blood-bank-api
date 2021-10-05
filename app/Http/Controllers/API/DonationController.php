@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Donate;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DonationController extends Controller
@@ -17,7 +18,7 @@ class DonationController extends Controller
     {
         try {
             $data = $request->all();
-            $data['user_id'] = 9;
+            $data['user_id'] = User::all()->first()->id;
 
             Donate::create($data);
 
