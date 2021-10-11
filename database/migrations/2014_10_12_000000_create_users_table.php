@@ -21,10 +21,10 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->char('gender')->nullable(); // M,F
-            $table->char('blood_type')->nullable(); // O+
+            $table->unsignedBigInteger('blood_type')->nullable();
             $table->date('birth_date')->nullable();
             $table->text('address')->nullable();
-            $table->unsignedInteger('district_id')->nullable();
+            $table->unsignedBigInteger('district_id')->nullable();
             $table->integer('temperature')->nullable();
             $table->string('pulse', 20)->nullable();
             $table->string('bp', 20)->nullable();

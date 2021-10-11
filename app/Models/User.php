@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Role;
+use App\Models\Donation;
 
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
@@ -59,6 +60,11 @@ class User extends Authenticatable implements JWTSubject
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function donations()
+    {
+        return $this->belongsTo(Donation::class);
     }
 
     /**

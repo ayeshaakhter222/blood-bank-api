@@ -23,11 +23,18 @@ class JwtAuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return response()->json([
+                'errors' => $validator->errors(),
+                'message' => 'Validation Error',
+                'status' => false
+            ], 200);
         }
 
         if (! $token = JWTAuth::attempt($validator->validated())) {
-            return response()->json(['error' => 'Username/Password is Incorrect'], 401);
+            return response()->json([
+                'message' => 'Username/Password is Incorrect',
+                'status' => false
+            ], 200);
         }
 
         return $this->createNewToken($token);
@@ -117,7 +124,8 @@ class JwtAuthController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth('api')->factory()->getTTL() * 60,
-            'user' => auth()->user()
+            'user' => auth()->user(),
+            'status' => true
         ]);
     }
 }
